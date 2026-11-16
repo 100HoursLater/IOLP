@@ -8,7 +8,7 @@
  (instruct[:-i += 2]),
  (instruct[
   if_conditional(:-i == 2):
-   print("My i equals", ::conditional)
+   print("My i equals", :-conditional)
   end :-if_conditional
  ]),
  (#return: {})
@@ -43,15 +43,18 @@ end ; ends something
 ; for loop
 
 for(_var _int : U = 1, I <= 100, I++): 
-    conditional(I % 15 == 0):
-        print("FizzBuzz\n")
+  if_conditional(I % 15 == 0):
+      print("FizzBuzz\n")
     end else_conditional(I % 3 == 0):
-        print("Fizz\n")
+      print("Fizz\n")
     end else_conditional(I % 5 == 0):
-        print("Buzz\n")
+      print("Buzz\n")
     end else: 
-        print("\n",I)
-    end :-conditional
+      print("\n",I)
+  end :-conditional
+end :-for
+
+for():
 end :-for
 
 ; more complex 
@@ -75,7 +78,7 @@ end :-for
      tower[]
    )
    (build_tower(x,n):
-     labels[(for(i res): conditional:(= i 0): print(:-tower_id_keyword))]
+     labels[(for(i res): conditional:(= i 0): print(:-tower_id_keyword). end :-for)]
     end :-build_tower()
    )
   )
